@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Frete;
+use App\Models\Veiculo;
 use Illuminate\Http\Request;
 
 class FreteController extends Controller
@@ -29,16 +30,6 @@ class FreteController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -46,7 +37,17 @@ class FreteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $data = $request->all();
+
+            $frete = $this->frete->create($data);
+
+            return response()->json($frete);
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+
     }
 
     /**
@@ -57,18 +58,8 @@ class FreteController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $frete = $this->frete->find($id);
+        return response()->json($frete);
     }
 
     /**
@@ -80,7 +71,13 @@ class FreteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $frete = $this->frete->find($id);
+        $frete->update($data);
+
+
+        return response()->json($frete);
     }
 
     /**
@@ -91,6 +88,9 @@ class FreteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $frete = $this->frete->find($id);
+        $frete->delete();
+
+        return response()->json(['data' => ['msg' => 'O Frete foi removido com sucesso ']]);
     }
 }

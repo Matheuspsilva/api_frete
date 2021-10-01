@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Frete extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['data_inicio', 'data_fim', 'status', 'veiculo_id'];
+
+    public function veiculo(){
+        return $this->hasOne(Veiculo::class);
+    }
 }

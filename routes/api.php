@@ -19,4 +19,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('fretes/',[FreteController::class, 'index']);
+Route::prefix('fretes')->group(function () {
+
+    Route::get('/',[FreteController::class, 'index']);
+    Route::get('/{id}',[FreteController::class, 'show']);
+    Route::post('/',[FreteController::class, 'store']);
+    Route::put('/{id}',[FreteController::class, 'update']);
+    Route::delete('/{id}',[FreteController::class, 'destroy']);
+
+
+
+});
