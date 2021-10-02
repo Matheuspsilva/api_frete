@@ -17,6 +17,7 @@ class CreateFretesTable extends Migration
         Schema::create('fretes', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Veiculo::class, 'veiculo_id')->constrained();
+            $table->float('valor');
             $table->date('data_inicio');
             $table->date('data_fim');
             $table->string('status');
