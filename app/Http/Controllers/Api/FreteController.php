@@ -25,9 +25,9 @@ class FreteController extends Controller
      */
     public function index()
     {
-        $fretes = $this->frete->all();
+        $fretes = $this->frete->paginate('10');
 
-        return response()->json($fretes);
+        return response()->json($fretes, 200);
     }
 
     /**
@@ -38,15 +38,16 @@ class FreteController extends Controller
      */
     public function store(FreteRequest $request)
     {
+        $data = $request->all();
+
         try {
-            $data = $request->all();
 
             $frete = $this->frete->create($data);
 
-            return response()->json($frete);
+            return response()->json(['data' => ['msg' => 'O Frete foi cadastrado com sucesso ']], 200);
 
-        } catch (\Throwable $th) {
-            throw $th;
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 401);
         }
 
     }
@@ -59,8 +60,15 @@ class FreteController extends Controller
      */
     public function show($id)
     {
-        $frete = $this->frete->find($id);
-        return response()->json($frete);
+        try {
+
+            $frete = $this->frete->findOrFail($id);
+            return response()->json($frete, 200);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 401);
+        }
+
     }
 
     /**
@@ -70,15 +78,21 @@ class FreteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FreteRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $data = $request->all();
 
-        $frete = $this->frete->find($id);
-        $frete->update($data);
+        try {
 
+            $frete = $this->frete->findOrFail($id);
+            $frete->update($data);
 
-        return response()->json($frete);
+            return response()->json(['data' => ['msg' => 'O Frete foi atualizado com sucesso ']], 200);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 401);
+        }
+
     }
 
     /**
@@ -89,9 +103,14 @@ class FreteController extends Controller
      */
     public function destroy($id)
     {
-        $frete = $this->frete->find($id);
-        $frete->delete();
+        try {
+            $frete = $this->frete->findOrFail($id);
+            $frete->delete();
 
-        return response()->json(['data' => ['msg' => 'O Frete foi removido com sucesso ']]);
+            return response()->json(['data' => ['msg' => 'O Frete foi removido com sucesso ']], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 401);
+        }
+
     }
 }

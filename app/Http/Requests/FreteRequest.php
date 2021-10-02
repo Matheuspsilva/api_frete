@@ -27,7 +27,6 @@ class FreteRequest extends FormRequest
             'data_inicio' => 'required',
             'data_fim' => 'required',
             'status' => 'required',
-            'veiculo_id' => 'required',
             'valor' => 'required'
         ];
     }
