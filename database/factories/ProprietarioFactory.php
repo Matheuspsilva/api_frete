@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Veiculo;
+use App\Models\Proprietario;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class VeiculoFactory extends Factory
+class ProprietarioFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Veiculo::class;
+    protected $model = Proprietario::class;
 
     /**
      * Define the model's default state.
@@ -22,8 +22,7 @@ class VeiculoFactory extends Factory
     public function definition()
     {
         return [
-            'proprietario_id' => rand(1,9),
-            'placa' => $this->faker->numerify('ABC ###'),
+            'name' => $this->faker->name(),
         ];
     }
 }

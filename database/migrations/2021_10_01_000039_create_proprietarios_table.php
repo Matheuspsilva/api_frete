@@ -1,11 +1,10 @@
 <?php
 
-use App\Models\Proprietario;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVeiculosTable extends Migration
+class CreateProprietariosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +13,9 @@ class CreateVeiculosTable extends Migration
      */
     public function up()
     {
-        Schema::create('veiculos', function (Blueprint $table) {
+        Schema::create('proprietarios', function (Blueprint $table) {
             $table->id();
-            $table->string('placa');
-            $table->foreignIdFor(Proprietario::class, 'proprietario_id')->constrained();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateVeiculosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('veiculos');
+        Schema::dropIfExists('proprietarios');
     }
 }
