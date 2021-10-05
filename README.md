@@ -1,5 +1,3 @@
-# Telzir - Calculadora de Tarifas
-
 ## Descrição do Projeto
 <p align="center">Api de Sistema de cadastro de fretes utillizando laravel</p>
 
