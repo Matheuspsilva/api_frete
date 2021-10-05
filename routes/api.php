@@ -31,16 +31,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
 
     Route::resource('users', UserController::class);
     Route::resource('veiculos', VeiculoController::class);
-
-    Route::prefix('fretes')->name('fretes.')->group(function () {
-
-        Route::get('/',[FreteController::class, 'index'])->name('index');
-        Route::get('/{id}',[FreteController::class, 'show'])->name('show');
-        Route::post('/',[FreteController::class, 'store'])->name('store');
-        Route::put('/{id}',[FreteController::class, 'update'])->name('update');
-        Route::delete('/{id}',[FreteController::class, 'destroy'])->name('destroy');
-
-    });
+    Route::resource('fretes', FreteController::class);
 
 });
 
