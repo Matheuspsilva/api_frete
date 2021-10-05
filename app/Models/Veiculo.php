@@ -9,5 +9,5 @@ class Veiculo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['placa', 'proprietario'];
+    protected $fillable = ['placa', 'proprietario_id'];
 }
