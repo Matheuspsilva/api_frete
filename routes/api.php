@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\LoginJwtController;
 use App\Http\Controllers\Api\FreteController;
+use App\Http\Controllers\Api\ProprietarioController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VeiculoController;
 use Illuminate\Http\Request;
@@ -23,15 +24,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('login', [LoginJwtController::class, 'login'])->name('login');
-Route::get('logout', [LoginJwtController::class, 'login'])->name('logout');
-Route::get('refresh', [LoginJwtController::class, 'login'])->name('refresh');
+Route::get('logout', [LoginJwtController::class, 'logout'])->name('logout');
+Route::get('refresh', [LoginJwtController::class, 'refresh'])->name('refresh');
 
 
 Route::group(['middleware' => ['jwt.auth']], function () {
 
     Route::resource('users', UserController::class);
+    Route::resource('proprietarios', ProprietarioController::class);
     Route::resource('veiculos', VeiculoController::class);
     Route::resource('fretes', FreteController::class);
+
 
 });
 
