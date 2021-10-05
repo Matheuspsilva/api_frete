@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(10)->create();
         \App\Models\Proprietario::factory(10)->create();
         \App\Models\Veiculo::factory(10)->create();
+        \App\Models\Frete::factory(10)->create();
     }
 }
