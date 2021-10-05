@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\LoginJwtController;
 use App\Http\Controllers\Api\FreteController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\VeiculoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ Route::get('refresh', [LoginJwtController::class, 'login'])->name('refresh');
 Route::group(['middleware' => ['jwt.auth']], function () {
 
     Route::resource('users', UserController::class);
+    Route::resource('veiculos', VeiculoController::class);
 
     Route::prefix('fretes')->name('fretes.')->group(function () {
 
