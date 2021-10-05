@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Api\ApiMessages;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FreteRequest;
 use App\Models\Frete;
@@ -44,10 +45,14 @@ class FreteController extends Controller
 
             $frete = $this->frete->create($data);
 
-            return response()->json(['data' => ['msg' => 'O Frete foi cadastrado com sucesso ']], 200);
+            return response()->json(['data' => [
+                'msg' => 'O Frete foi cadastrado com sucesso '
+                ]
+            ], 200);
 
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 401);
+            $message = new ApiMessages($e->getMessage());
+		    return response()->json($message->getMessage(), 401);
         }
 
     }
@@ -63,10 +68,14 @@ class FreteController extends Controller
         try {
 
             $frete = $this->frete->findOrFail($id);
-            return response()->json($frete, 200);
+
+            return response()->json([
+                'data' => $frete
+            ], 200);
 
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 401);
+            $message = new ApiMessages($e->getMessage());
+		    return response()->json($message->getMessage(), 401);
         }
 
     }
@@ -87,10 +96,14 @@ class FreteController extends Controller
             $frete = $this->frete->findOrFail($id);
             $frete->update($data);
 
-            return response()->json(['data' => ['msg' => 'O Frete foi atualizado com sucesso ']], 200);
+            return response()->json(['data' => [
+                'msg' => 'O Frete foi atualizado com sucesso '
+                ]
+            ], 200);
 
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 401);
+            $message = new ApiMessages($e->getMessage());
+		    return response()->json($message->getMessage(), 401);
         }
 
     }
@@ -104,12 +117,18 @@ class FreteController extends Controller
     public function destroy($id)
     {
         try {
+
             $frete = $this->frete->findOrFail($id);
             $frete->delete();
 
-            return response()->json(['data' => ['msg' => 'O Frete foi removido com sucesso ']], 200);
+            return response()->json(['data' => [
+                'msg' => 'O Frete foi removido com sucesso ']
+            ]
+            , 200);
+
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 401);
+            $message = new ApiMessages($e->getMessage());
+		    return response()->json($message->getMessage(), 401);
         }
 
     }
