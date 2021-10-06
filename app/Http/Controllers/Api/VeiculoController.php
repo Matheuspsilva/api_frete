@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Api\ApiMessages;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\VeiculoRequest;
 use App\Models\Veiculo;
 use Illuminate\Http\Request;
 
@@ -34,7 +35,7 @@ class VeiculoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VeiculoRequest $request)
     {
         $data = $request->all();
 

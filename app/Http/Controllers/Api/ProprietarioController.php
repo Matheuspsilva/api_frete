@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Api\ApiMessages;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProprietarioRequest;
 use App\Models\Proprietario;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,7 @@ class ProprietarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProprietarioRequest $request)
     {
         $data = $request->all();
 

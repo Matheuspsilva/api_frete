@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class FreteRequest extends FormRequest
+class ProprietarioRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +24,7 @@ class FreteRequest extends FormRequest
     public function rules()
     {
         return [
-            'data_inicio' => 'required',
-            'data_fim' => 'required',
-            'status' => [
-                'required',
-                Rule::in(['iniciado', 'em trânsito', 'concluído']),
-            ],
-            'valor' => 'required'
+            'name' => 'required'
         ];
     }
 }
